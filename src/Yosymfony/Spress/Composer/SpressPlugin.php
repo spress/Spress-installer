@@ -5,7 +5,7 @@ namespace Yosymfony\Spress\Composer;
 use Composer\Plugin\PluginInterface;
 use Composer\Composer;
 use Composer\IO\IOInterface;
-use Yosymfony\Spress\Installer\Installer;
+use Yosymfony\Spress\Composer\Installer\Installer;
 
 class SpressPlugin implements PluginInterface
 {
