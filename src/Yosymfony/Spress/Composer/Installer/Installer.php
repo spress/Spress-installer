@@ -58,7 +58,12 @@ class Installer extends LibraryInstaller
      */
     public function isInstalled(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        return true;
+        if($this->isInstallFromSpressRoot() && self::TYPE_PLUGIN === $package->getType())
+        {
+            return true;   
+        }
+        
+        parent::isInstalled($repo, $package);
     }
     
     /**
@@ -66,10 +71,12 @@ class Installer extends LibraryInstaller
      */
     public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        if(false == $this->isInstallFromSpressRoot())
+        if($this->isInstallFromSpressRoot() && self::TYPE_PLUGIN === $package->getType())
         {
-            parent::install($repo, $package);
+            return;   
         }
+        
+        parent::install($repo, $package);
     }
     
     /**
@@ -77,10 +84,12 @@ class Installer extends LibraryInstaller
      */
     public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
     {
-        if(false == $this->isInstallFromSpressRoot())
+        if($this->isInstallFromSpressRoot() && self::TYPE_PLUGIN === $package->getType())
         {
-            parent::update($repo, $initial, $package);
+            return;   
         }
+
+        parent::update($repo, $initial, $package);
     }
     
     /**
@@ -88,10 +97,12 @@ class Installer extends LibraryInstaller
      */
     public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        if(false == $this->isInstallFromSpressRoot())
+        if($this->isInstallFromSpressRoot() && self::TYPE_PLUGIN === $package->getType())
         {
-            parent::uninstall($repo, $package);
+            return;   
         }
+        
+        parent::uninstall($repo, $package);
     }
     
     /**
