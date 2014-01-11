@@ -71,7 +71,7 @@ class InstallerTest extends TestCase
         $this->ensureDirectoryExistsAndClear($this->spressDir);
         
         $this->spressTemplateDir = realpath(sys_get_temp_dir()).DIRECTORY_SEPARATOR
-            .'spress-test/app/templates';
+            .'spress-test/app/config';
         $this->ensureDirectoryExistsAndClear($this->spressTemplateDir);
     
         $this->config->merge(

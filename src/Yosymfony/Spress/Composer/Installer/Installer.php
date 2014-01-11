@@ -4,6 +4,7 @@ namespace Yosymfony\Spress\Composer\Installer;
 
 use Composer\Installer\LibraryInstaller;
 use Composer\Package\PackageInterface;
+use Composer\Repository\InstalledRepositoryInterface;
 use Symfony\Component\Yaml\Yaml;
 
 class Installer extends LibraryInstaller
@@ -13,6 +14,7 @@ class Installer extends LibraryInstaller
     
     const CONFIG_FILE = 'config.yml';
     const TEMPLATE_DIR = 'app/templates';
+    const CONFIG_DIR = 'app/config';
     
     /**
     * {@inheritDoc}
@@ -22,6 +24,11 @@ class Installer extends LibraryInstaller
         switch($package->getType())
         {
             case self::TYPE_PLUGIN:
+                if($this->isInstallFromSpressRoot())
+                {
+                    return parent::getPackageBasePath($package);
+                }
+                
                 $dir = $this->getPluginsDir();
             break;
             
@@ -44,6 +51,47 @@ class Installer extends LibraryInstaller
             self::TYPE_PLUGIN,
             self::TYPE_THEME
         ], true);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function isInstalled(InstalledRepositoryInterface $repo, PackageInterface $package)
+    {
+        return true;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
+    {
+        if(false == $this->isInstallFromSpressRoot())
+        {
+            parent::install($repo, $package);
+        }
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
+    {
+        if(false == $this->isInstallFromSpressRoot())
+        {
+            parent::update($repo, $initial, $package);
+        }
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
+    {
+        if(false == $this->isInstallFromSpressRoot())
+        {
+            parent::uninstall($repo, $package);
+        }
     }
     
     /**
@@ -107,7 +155,7 @@ class Installer extends LibraryInstaller
      */
     protected function getThemeDir()
     {
-        if(false == $this->existsTemplateDir())
+        if(false == $this->isInstallFromSpressRoot())
         {
             throw new \InvalidArgumentException(
                 sprintf(
@@ -124,9 +172,9 @@ class Installer extends LibraryInstaller
      * 
      * @return boolean
      */
-    protected function existsTemplateDir()
+    protected function existsConfigDir()
     {
-        return file_exists(self::TEMPLATE_DIR);
+        return file_exists(self::CONFIG_DIR);
     }
     
     /**
@@ -140,5 +188,13 @@ class Installer extends LibraryInstaller
         $result = trim($result, '//');
         
         return $result;
+    }
+    
+    /**
+     * @return boolean
+     */
+    protected function isInstallFromSpressRoot()
+    {
+        return $this->existsConfigDir();
     }
 }
