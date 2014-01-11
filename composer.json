@@ -24,7 +24,7 @@
     },
     "require": {
         "composer-plugin-api": "*",
-        "symfony/yaml": "2.4.*@dev"
+        "symfony/yaml": "2.4.*"
     },    
     "require-dev": {
         "composer/composer": "1.*",
