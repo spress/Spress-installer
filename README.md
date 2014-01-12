@@ -9,6 +9,14 @@ Package type supported:
 Spress add-ons installer ignores Spress plugins packages when you install a theme
 from your Spress root folder.
 
+### Installation
+
+Add the following to your Spress plugin or theme `composer.json`:
+
+    "require": {
+        "yosymfony/spress-installer": ">=1.0,<2.0"
+    }
+
 ### Extra values in *composer.json*
 
 ```
