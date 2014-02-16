@@ -101,6 +101,17 @@ class InstallerTest extends TestCase
     
     public function testGetInstallPathForThemes()
     {
+        $library = new Installer($this->io, $this->composer);
+        $package = $this->createThemePackageMock('Test');
+    
+        $this->assertEquals(
+            $this->vendorDir.'/yosymfony/spress/app/templates/Test',
+            $library->getInstallPath($package)
+        );
+    }
+    
+    public function testGetInstallPathForThemesSpressRoot()
+    {
         chdir($this->spressDir);
         
         $library = new Installer($this->io, $this->composer);
@@ -169,6 +180,7 @@ class InstallerTest extends TestCase
     
         $package->shouldReceive('getExtra')->andReturn($extra);
         $package->shouldReceive('getTargetDir')->andReturn('');
+        $package->shouldReceive('getPrettyName')->andReturn($spressName);
     
         return $package;
     }

@@ -15,6 +15,7 @@ class Installer extends LibraryInstaller
     const CONFIG_FILE = 'config.yml';
     const TEMPLATE_DIR = 'app/templates';
     const CONFIG_DIR = 'app/config';
+    const SPRESS_VENDOR_DIR = 'yosymfony/spress';
     
     /**
     * {@inheritDoc}
@@ -24,11 +25,6 @@ class Installer extends LibraryInstaller
         switch($package->getType())
         {
             case self::TYPE_PLUGIN:
-                if($this->isInstallFromSpressRoot())
-                {
-                    return parent::getPackageBasePath($package);
-                }
-                
                 $dir = $this->getPluginsDir();
             break;
             
@@ -166,16 +162,14 @@ class Installer extends LibraryInstaller
      */
     protected function getThemeDir()
     {
+        $result = self::TEMPLATE_DIR;
+        
         if(false == $this->isInstallFromSpressRoot())
         {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Unable to install theme. Spress themes should be installed at %s from the Spress root.", 
-                    self::TEMPLATE_DIR)
-            );
+            $result = sprintf('%s/%s/%s', $this->vendorDir, self::SPRESS_VENDOR_DIR, self::TEMPLATE_DIR);
         }
         
-        return self::TEMPLATE_DIR;
+        return $result;
     }
     
     /**
