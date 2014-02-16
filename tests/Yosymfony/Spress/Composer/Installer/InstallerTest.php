@@ -57,6 +57,9 @@ class InstallerTest extends TestCase
         $this->composer = new Composer();
         $this->config = new Config();
         $this->composer->setConfig($this->config);
+        
+        $this->package = new RootPackage('yosymfony/spress', '1.0.0', '1.0.0');
+        $this->composer->setPackage($this->package);
     
         $this->vendorDir = realpath(sys_get_temp_dir()).DIRECTORY_SEPARATOR
             .'composer-test-vendor';
@@ -101,7 +104,12 @@ class InstallerTest extends TestCase
     
     public function testGetInstallPathForThemes()
     {
-        $library = new Installer($this->io, $this->composer);
+        $package = new RootPackage('yosymfony/not-spress', '1.0.0', '1.0.0');
+        $composer = $this->createComposerMock();
+        $composer->setPackage($package);
+        
+        $library = new Installer($this->io, $composer);
+        
         $package = $this->createThemePackageMock('Test');
     
         $this->assertEquals(

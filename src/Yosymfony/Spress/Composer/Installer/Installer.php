@@ -59,7 +59,7 @@ class Installer extends LibraryInstaller
             return true;   
         }
         
-        parent::isInstalled($repo, $package);
+        return parent::isInstalled($repo, $package);
     }
     
     /**
@@ -200,6 +200,6 @@ class Installer extends LibraryInstaller
      */
     protected function isInstallFromSpressRoot()
     {
-        return $this->existsConfigDir();
+        return 'yosymfony/spress' === $this->composer->getPackage()->getName();
     }
 }
