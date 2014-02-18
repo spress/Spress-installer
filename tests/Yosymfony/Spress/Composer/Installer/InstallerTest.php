@@ -113,7 +113,7 @@ class InstallerTest extends TestCase
         $package = $this->createThemePackageMock('Test');
     
         $this->assertEquals(
-            $this->vendorDir.'/yosymfony/spress/app/templates/Test',
+            $this->vendorDir.'/yosymfony/spress-templates/Test',
             $library->getInstallPath($package)
         );
     }

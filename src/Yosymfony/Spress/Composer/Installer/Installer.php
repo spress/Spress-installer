@@ -13,9 +13,9 @@ class Installer extends LibraryInstaller
     const TYPE_THEME = 'spress-theme';
     
     const CONFIG_FILE = 'config.yml';
-    const TEMPLATE_DIR = 'app/templates';
+    const TEMPLATES_DIR_SPRESS_ROOT = 'app/templates';
+    const TEMPLATES_DIR = 'yosymfony/spress-templates';
     const CONFIG_DIR = 'app/config';
-    const SPRESS_VENDOR_DIR = 'yosymfony/spress';
     
     /**
     * {@inheritDoc}
@@ -162,11 +162,11 @@ class Installer extends LibraryInstaller
      */
     protected function getThemeDir()
     {
-        $result = self::TEMPLATE_DIR;
+        $result = self::TEMPLATES_DIR_SPRESS_ROOT;
         
         if(false == $this->isInstallFromSpressRoot())
         {
-            $result = sprintf('%s/%s/%s', $this->vendorDir, self::SPRESS_VENDOR_DIR, self::TEMPLATE_DIR);
+            $result = sprintf('%s/%s', $this->vendorDir, self::TEMPLATES_DIR);
         }
         
         return $result;
