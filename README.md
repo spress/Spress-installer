@@ -16,18 +16,19 @@ If you use Spress as package, the location of the themes is `vendor/yosymfony/sp
 ### Installation
 
 Add the following to your Spress plugin or theme `composer.json`:
-
-    "require": {
-        "yosymfony/spress-installer": ">=1.0,<2.0"
-    }
+```javascript
+"require": {
+    "yosymfony/spress-installer": ">=1.0,<2.0"
+}
+```
 
 ### Extra values in *composer.json*
 
-```
+```javascript
 "extra": {
-        "spress_name": "Plugin-or-theme-name",
-        "spress_class": "Your\\Plugin\\Namespace\\Entry-poin",
-    }
+    "spress_name": "Plugin-or-theme-name",
+    "spress_class": "Your\\Plugin\\Namespace\\Entry-poin",
+}
 ```
 
 * **spres_name**: The name of your theme/plugin. Don't uses spaces.
