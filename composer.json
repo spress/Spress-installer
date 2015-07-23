@@ -19,12 +19,12 @@
     "extra": {
         "class": "Yosymfony\\Spress\\Composer\\SpressPlugin",
         "branch-alias": {
-            "dev-master": "1.1.x-dev"
+            "dev-master": "2.0.x-dev"
         }
     },
     "require": {
         "composer-plugin-api": "^1.0",
-        "symfony/yaml": "2.6.*"
+        "symfony/yaml": "2.7.*"
     },    
     "require-dev": {
         "composer/composer": "1.*",

@@ -5,7 +5,6 @@ namespace Yosymfony\Spress\Composer\Installer;
 use Composer\Installer\LibraryInstaller;
 use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
-use Symfony\Component\Yaml\Yaml;
 
 class Installer extends LibraryInstaller
 {
@@ -13,13 +12,14 @@ class Installer extends LibraryInstaller
     const TYPE_THEME = 'spress-theme';
 
     const CONFIG_FILE = 'config.yml';
+    const PLUGIN_DIR = 'src/plugins';
     const TEMPLATES_DIR_SPRESS_ROOT = 'app/templates';
     const TEMPLATES_DIR = 'yosymfony/spress-templates';
     const CONFIG_DIR = 'app/config';
 
     /**
-    * {@inheritDoc}
-    */
+     * {@inheritDoc}
+     */
     public function getPackageBasePath(PackageInterface $package)
     {
         switch ($package->getType()) {
@@ -32,7 +32,7 @@ class Installer extends LibraryInstaller
             break;
         }
 
-        $name  = $this->getExtraName($package);
+        $name = $this->getExtraName($package);
 
         return $dir.'/'.$name;
     }
@@ -44,7 +44,7 @@ class Installer extends LibraryInstaller
     {
         return in_array($packageType, [
             self::TYPE_PLUGIN,
-            self::TYPE_THEME
+            self::TYPE_THEME,
         ], true);
     }
 
@@ -97,13 +97,14 @@ class Installer extends LibraryInstaller
     }
 
     /**
-    * Get the theme/plugin name from the package extra info
-    *
-    * @param PackageInterface $package
-    * @throws \InvalidArgumentException
-    *
-    * @return string
-    */
+     * Get the theme/plugin name from the package extra info.
+     *
+     * @param PackageInterface $package
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return string
+     */
     protected function getExtraName(PackageInterface $package)
     {
         $extraData = $package->getExtra();
@@ -119,38 +120,17 @@ class Installer extends LibraryInstaller
     }
 
     /**
-     * Get the plugins folder from config.yml of the site
+     * Get the plugins folder.
      *
      * @return string Relative path to composer.json.
      */
     protected function getPluginsDir()
     {
-        $config = $this->getConfigSite();
-        $relativePath = isset($config['plugins']) ? $config['plugins'] : '_plugins';
-        $relativePath = $this->prepareDir($relativePath);
-
-        return $relativePath;
+        return self::PLUGIN_DIR;
     }
 
     /**
-     * Read the config.yml of the site
-     *
-     * @return array
-     */
-    protected function getConfigSite()
-    {
-        if (!file_exists(self::CONFIG_FILE)) {
-            throw new \InvalidArgumentException(
-                'Unable to install Spress plugin: config.yml file of the site '
-                .'was not found.'
-            );
-        }
-
-        return Yaml::parse(self::CONFIG_FILE);
-    }
-
-    /**
-     * Get the theme dir
+     * Get the theme dir.
      *
      * @return string Relative path to composer.json.
      */
@@ -168,7 +148,7 @@ class Installer extends LibraryInstaller
     /**
      * Exists the template dir at the Spress installation dir?
      *
-     * @return boolean
+     * @return bool
      */
     protected function existsConfigDir()
     {
@@ -176,20 +156,7 @@ class Installer extends LibraryInstaller
     }
 
     /**
-     * @param string $relativePath
-     *
-     * @return string
-     */
-    protected function prepareDir($relativePath)
-    {
-        $result = str_replace(['.', '..'], '', $relativePath);
-        $result = trim($result, '//');
-
-        return $result;
-    }
-
-    /**
-     * @return boolean
+     * @return bool
      */
     protected function isInstallFromSpressRoot()
     {
