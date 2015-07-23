@@ -8,7 +8,7 @@ php:
 
 before_script:
   - composer selfupdate
-  - composer --dev install
+  - composer install
 
 matrix:
   allow_failures:
