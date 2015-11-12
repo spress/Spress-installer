@@ -75,7 +75,7 @@ class Installer extends LibraryInstaller
     /**
      * {@inheritDoc}
      */
-    public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
+    public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $package)
     {
         if ($this->isInstallFromSpressRoot() && self::TYPE_PLUGIN === $package->getType()) {
             return;
