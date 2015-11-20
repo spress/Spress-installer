@@ -57,7 +57,7 @@ class InstallerTest extends TestCase
         $this->config = new Config();
         $this->composer->setConfig($this->config);
 
-        $this->package = new RootPackage('yosymfony/spress', '1.0.0', '1.0.0');
+        $this->package = new RootPackage('yosymfony/spress', '2.0.0', '2.0.0');
         $this->composer->setPackage($this->package);
 
         $this->vendorDir = realpath(sys_get_temp_dir()).DIRECTORY_SEPARATOR
@@ -170,6 +170,7 @@ class InstallerTest extends TestCase
             );
         }
 
+        $package->shouldReceive('getName')->andReturn($spressName);
         $package->shouldReceive('getExtra')->andReturn($extra);
         $package->shouldReceive('getTargetDir')->andReturn('');
         $package->shouldReceive('getPrettyName')->andReturn($spressName);

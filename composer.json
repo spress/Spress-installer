@@ -12,8 +12,8 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Yosymfony\\Spress\\Composer": ["src/"]
+        "psr-4": {
+            "Yosymfony\\Spress\\Composer\\": "src/"
         }
     },
     "extra": {

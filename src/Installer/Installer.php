@@ -1,11 +1,25 @@
 <?php
 
+/*
+ * This file is part of the Yosymfony\Spress.
+ *
+ * (c) YoSymfony <http://github.com/yosymfony>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Yosymfony\Spress\Composer\Installer;
 
 use Composer\Installer\LibraryInstaller;
 use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
 
+/**
+ * Installer for Spress 2 add-ons.
+ *
+ * @author Victor Puertas <vpuertas@gmail.com>
+ */
 class Installer extends LibraryInstaller
 {
     const TYPE_PLUGIN = 'spress-plugin';
@@ -18,9 +32,9 @@ class Installer extends LibraryInstaller
     const CONFIG_DIR = 'app/config';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function getPackageBasePath(PackageInterface $package)
+    public function getInstallPath(PackageInterface $package)
     {
         switch ($package->getType()) {
             case self::TYPE_PLUGIN:
@@ -32,13 +46,13 @@ class Installer extends LibraryInstaller
             break;
         }
 
-        $name = $this->getExtraName($package);
+        $name = $this->getPackageName($package);
 
         return $dir.'/'.$name;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function supports($packageType)
     {
@@ -49,7 +63,7 @@ class Installer extends LibraryInstaller
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isInstalled(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
@@ -61,7 +75,7 @@ class Installer extends LibraryInstaller
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
@@ -73,7 +87,7 @@ class Installer extends LibraryInstaller
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $package)
     {
@@ -85,7 +99,7 @@ class Installer extends LibraryInstaller
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
@@ -105,18 +119,20 @@ class Installer extends LibraryInstaller
      *
      * @return string
      */
-    protected function getExtraName(PackageInterface $package)
+    protected function getPackageName(PackageInterface $package)
     {
         $extraData = $package->getExtra();
+        $name = $package->getName();
 
-        if (!array_key_exists('spress_name', $extraData)) {
-            throw new \InvalidArgumentException(
-                'Unable to install theme/plugin, Spress addons must '
-                .'include the name in the extra field of composer.json.'
-            );
+        if (isset($extraData['spress_name']) === true) {
+            $name = $extraData['spress_name'];
         }
 
-        return $extraData['spress_name'];
+        if (empty($name)) {
+            throw new \InvalidArgumentException('The name of the plugin or theme is empty.');
+        }
+
+        return $name;
     }
 
     /**
