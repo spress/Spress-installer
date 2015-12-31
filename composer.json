@@ -12,19 +12,18 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Yosymfony\\Spress\\Composer": ["src/"]
+        "psr-4": {
+            "Yosymfony\\Spress\\Composer\\": "src/"
         }
     },
     "extra": {
         "class": "Yosymfony\\Spress\\Composer\\SpressPlugin",
         "branch-alias": {
-            "dev-master": "1.1.x-dev"
+            "dev-master": "2.0-dev"
         }
     },
     "require": {
-        "composer-plugin-api": "^1.0",
-        "symfony/yaml": "2.6.*"
+        "composer-plugin-api": "^1.0"
     },    
     "require-dev": {
         "composer/composer": "1.*",

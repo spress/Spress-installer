@@ -1,6 +1,6 @@
 ## Spress add-ons installer
 
-[![Build Status](https://travis-ci.org/yosymfony/Spress-installer.png?branch=master)](https://travis-ci.org/yosymfony/Spress-installer)
+[![Build Status](https://travis-ci.org/yosymfony/Spress-installer.png?branch=2.0)](https://travis-ci.org/yosymfony/Spress-installer)
 
 Plugins and themes installer for Composer.
 
@@ -18,7 +18,7 @@ If you use Spress as package, the location of the themes is `vendor/yosymfony/sp
 Add the following to your Spress plugin or theme `composer.json`:
 ```javascript
 "require": {
-    "yosymfony/spress-installer": ">=1.0,<2.0"
+    "yosymfony/spress-installer": "2.0.*"
 }
 ```
 
