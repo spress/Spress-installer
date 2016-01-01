@@ -1,5 +1,5 @@
 {
-    "name": "yosymfony/spress-installer",
+    "name": "spress/spress-installer",
     "description": "Installer for Spress addons",
     "type": "composer-plugin",
     "keywords": ["spress", "installer", "themes", "plugins"],
@@ -28,6 +28,9 @@
     "require-dev": {
         "composer/composer": "1.*",
         "mockery/mockery": "0.9.*"
+    },
+    "replace": {
+        "yosymfony/spress-installer": "self.version"
     },
     "minimum-stability": "dev",
     "archive": {
