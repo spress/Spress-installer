@@ -1,6 +1,6 @@
 ## Spress add-ons installer
 
-[![Build Status](https://travis-ci.org/spress/Spress-installer.png?branch=master)](https://travis-ci.org/yosymfony/Spress-installer)
+[![Build Status](https://travis-ci.org/spress/Spress-installer.png?branch=master)](https://travis-ci.org/spress/Spress-installer)
 
 Plugins and themes installer for Composer.
 
