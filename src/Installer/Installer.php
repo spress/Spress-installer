@@ -28,7 +28,7 @@ class Installer extends LibraryInstaller
     const CONFIG_FILE = 'config.yml';
     const PLUGIN_DIR = 'src/plugins';
     const TEMPLATES_DIR_SPRESS_ROOT = 'app/templates';
-    const TEMPLATES_DIR = 'yosymfony/spress-templates';
+    const TEMPLATES_DIR = 'spress/spress-templates';
     const CONFIG_DIR = 'app/config';
 
     /**

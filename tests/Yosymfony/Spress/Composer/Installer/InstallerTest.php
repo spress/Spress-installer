@@ -57,7 +57,7 @@ class InstallerTest extends TestCase
         $this->config = new Config();
         $this->composer->setConfig($this->config);
 
-        $this->package = new RootPackage('yosymfony/spress', '2.0.0', '2.0.0');
+        $this->package = new RootPackage('spress/spress', '2.0.0', '2.0.0');
         $this->composer->setPackage($this->package);
 
         $this->vendorDir = realpath(sys_get_temp_dir()).DIRECTORY_SEPARATOR
@@ -101,7 +101,7 @@ class InstallerTest extends TestCase
 
     public function testGetInstallPathForThemes()
     {
-        $package = new RootPackage('yosymfony/not-spress', '1.0.0', '1.0.0');
+        $package = new RootPackage('spress/not-spress', '1.0.0', '1.0.0');
         $composer = $this->createComposerMock();
         $composer->setPackage($package);
 
@@ -110,7 +110,7 @@ class InstallerTest extends TestCase
         $package = $this->createThemePackageMock('Test');
 
         $this->assertEquals(
-            $this->vendorDir.'/yosymfony/spress-templates/Test',
+            $this->vendorDir.'/spress/spress-templates/Test',
             $library->getInstallPath($package)
         );
     }
@@ -120,10 +120,10 @@ class InstallerTest extends TestCase
         chdir($this->spressDir);
 
         $library = new Installer($this->io, $this->composer);
-        $package = $this->createThemePackageMock('Test');
+        $package = $this->createThemePackageMock('spress/theme-spresso');
 
         $this->assertEquals(
-            'app/templates/Test',
+            'app/templates/spress/theme-spresso',
             $library->getInstallPath($package)
         );
     }

@@ -12,7 +12,7 @@ Package type supported:
 Spress add-ons installer ignores Spress plugins packages when you install a theme
 from your Spress root folder.
 
-If you are using Spress as package, the location of the themes is `vendor/yosymfony/spress-templates`.
+If you are using Spress as package, the location of the themes is `vendor/spress/spress-templates`.
 
 ### Installation
 
