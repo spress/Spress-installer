@@ -176,6 +176,6 @@ class Installer extends LibraryInstaller
      */
     protected function isInstallFromSpressRoot()
     {
-        return 'yosymfony/spress' === $this->composer->getPackage()->getName();
+        return 'spress/spress' === $this->composer->getPackage()->getName();
     }
 }
