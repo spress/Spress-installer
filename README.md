@@ -9,18 +9,13 @@ Package type supported:
 * spress-plugin
 * spress-theme
 
-Spress add-ons installer ignores Spress plugins packages when you install a theme
-from your Spress root folder.
-
-If you are using Spress as package, the location of the themes is `vendor/spress/spress-templates`.
-
 ### Installation
 
 Adds the following to your Spress plugin or theme `composer.json` file:
 
 ```json
 "require": {
-    "yosymfony/spress-installer": "2.0.*"
+    "yosymfony/spress-installer": "~2.1"
 }
 ```
 
@@ -33,5 +28,20 @@ Adds the following to your Spress plugin or theme `composer.json` file:
 }
 ```
 
-* **spres_name**: The name of your theme/plugin. Don't uses spaces.
-* **spress_class**: The namespace of the class of a plugin (the entry-point to a plugins).
+* **spres_name**: The name of your theme/plugin that will be displayed by Spress. Don't uses spaces.
+* **spress_class**: The class name of the plugin (including namespaces).
+
+### An example of `composer.json` file
+
+First, an example of a simple plugin without namespaces:
+
+```json
+{
+    "name": "myname/my-spress-plugin",
+    "type": "spress-plugin",
+    "license": "MIT",
+    "require": {
+        "yosymfony/spress-installer": "~2.1"
+    }
+}
+```
