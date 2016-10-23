@@ -2,17 +2,14 @@
 
 namespace Yosymfony\Spress\Composer\Test\Installer;
 
-require __DIR__.'/../../../../../vendor/composer/composer/tests/Composer/TestCase.php';
+//require __DIR__.'/../../../../../vendor/composer/composer/tests/Composer/TestCase.php';
 
-use Composer\Util\Filesystem;
 use Composer\TestCase;
 use Composer\Composer;
 use Composer\Config;
 use Composer\Package\Package;
 use Composer\Downloader\DownloadManager;
-use Composer\Repository\InstalledRepositoryInterface;
 use Composer\IO\IOInterface;
-use Mockery as m;
 use Yosymfony\Spress\Composer\Installer\SpressInstaller;
 
 class SpressInstallerTest extends TestCase
@@ -20,66 +17,20 @@ class SpressInstallerTest extends TestCase
     /** @var Composer $composer */
     protected $composer;
 
-    /** @var Config $config */
-    protected $config;
-
-    /** @var string $vendorDir */
-    protected $vendorDir;
-
-    /** @var string $binDir */
-    protected $binDir;
-
-    /** @var DownloadManager $downloadManager */
-    protected $downloadManager;
-
-    /** @var InstalledRepositoryInterface $repository */
-    protected $repository;
-
     /** @var IOInterface $io */
     protected $io;
 
-    /** @var Filesystem $filesystem */
-    protected $filesystem;
-
-    /** @var RootPackage $package */
-    protected $package;
-
     protected function setUp()
     {
-        $this->filesystem = new Filesystem();
-
         $this->composer = new Composer();
-        $this->config = new Config();
-        $this->composer->setConfig($this->config);
+        $this->composer->setConfig(new Config());
 
-        $this->vendorDir = realpath(sys_get_temp_dir()).DIRECTORY_SEPARATOR
-            .'composer-test-vendor';
-        $this->ensureDirectoryExistsAndClear($this->vendorDir);
+        $downloadManager = $this->getMockBuilder(DownloadManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->composer->setDownloadManager($downloadManager);
 
-        $this->binDir = realpath(sys_get_temp_dir()).DIRECTORY_SEPARATOR
-            .'composer-test-bin';
-        $this->ensureDirectoryExistsAndClear($this->binDir);
-
-        $this->config->merge(
-            array(
-                'config' => array(
-                    'vendor-dir' => $this->vendorDir,
-                    'bin-dir' => $this->binDir,
-                ),
-            )
-        );
-
-        $this->downloadManager = m::mock('Composer\Downloader\DownloadManager');
-        $this->composer->setDownloadManager($this->downloadManager);
-
-        $this->repository = m::mock('Composer\Repository\InstalledRepositoryInterface');
-        $this->io = m::mock('Composer\IO\IOInterface');
-    }
-
-    protected function tearDown()
-    {
-        $this->filesystem->removeDirectory($this->vendorDir);
-        $this->filesystem->removeDirectory($this->binDir);
+        $this->io = $this->getMock(IOInterface::class);
     }
 
     public function testGetInstallPathForThemes()
