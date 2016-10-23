@@ -2,8 +2,6 @@
 
 namespace Yosymfony\Spress\Composer\Test\Installer;
 
-//require __DIR__.'/../../../../../vendor/composer/composer/tests/Composer/TestCase.php';
-
 use Composer\TestCase;
 use Composer\Composer;
 use Composer\Config;
