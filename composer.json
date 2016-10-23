@@ -11,6 +11,16 @@
             "homepage": "http://yosymfony.com"
         }
     ],
+    "require": {
+        "composer-plugin-api": "^1.0"
+    },
+    "require-dev": {
+        "composer/composer": "^1.0"
+    },
+    "replace": {
+        "yosymfony/spress-installer": "self.version"
+    },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Yosymfony\\Spress\\Composer\\": "src/"
@@ -19,20 +29,9 @@
     "extra": {
         "class": "Yosymfony\\Spress\\Composer\\SpressPlugin",
         "branch-alias": {
-            "dev-master": "2.0-dev"
+            "dev-master": "2.1-dev"
         }
     },
-    "require": {
-        "composer-plugin-api": "^1.0"
-    },    
-    "require-dev": {
-        "composer/composer": "1.*",
-        "mockery/mockery": "0.9.*"
-    },
-    "replace": {
-        "yosymfony/spress-installer": "self.version"
-    },
-    "minimum-stability": "dev",
     "archive": {
         "exclude": [
             "tests",
