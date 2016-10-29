@@ -21,8 +21,14 @@ use Composer\Package\PackageInterface;
  */
 class SpressInstaller extends LibraryInstaller
 {
+    /** @var string */
     const TYPE_PLUGIN = 'spress-plugin';
+
+    /** @var string */
     const TYPE_THEME = 'spress-theme';
+
+    /** @var string */
+    const EXTRA_SPRESS_SITE_DIR = 'spress_site_dir';
 
     /**
      * {@inheritdoc}
@@ -30,10 +36,10 @@ class SpressInstaller extends LibraryInstaller
     public function getInstallPath(PackageInterface $package)
     {
         if ($package->getType() === self::TYPE_PLUGIN) {
-            return 'src/plugins/'.$package->getPrettyName();
+            return $this->getSpressSiteDir().'src/plugins/'.$package->getPrettyName();
         }
 
-        return 'src/themes/'.$package->getPrettyName();
+        return $this->getSpressSiteDir().'src/themes/'.$package->getPrettyName();
     }
 
     /**
@@ -45,5 +51,22 @@ class SpressInstaller extends LibraryInstaller
             self::TYPE_PLUGIN,
             self::TYPE_THEME,
         ], true);
+    }
+
+    /**
+     * Returns the Spress site directory. If the extra attributte
+     * "spress_site_dir" is not presents in the "extra" section of the root
+     * package,.
+     *
+     * @return string If the extra attributte
+     *                "spress_site_dir" is not presents in the "extra" section of the root
+     *                package, an empty string will be return
+     */
+    protected function getSpressSiteDir()
+    {
+        $rootPackage = $this->composer->getPackage();
+        $extras = $rootPackage->getExtra();
+
+        return isset($extras[self::EXTRA_SPRESS_SITE_DIR]) ? $extras[self::EXTRA_SPRESS_SITE_DIR].'/' : '';
     }
 }
