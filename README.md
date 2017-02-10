@@ -35,7 +35,7 @@ PluginInstaller 2.1 requires Spress >= 2.2.0.
 
 ### An example of `composer.json` file
 
-First, an example of a simple plugin without namespaces:
+First, an example for a simple plugin without namespaces:
 
 ```json
 {
@@ -48,7 +48,7 @@ First, an example of a simple plugin without namespaces:
 }
 ```
 
-Second, an example of a plugin using namespace:
+Second, an example for a plugin using namespace:
 
 
 ```json
