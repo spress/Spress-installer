@@ -18,16 +18,20 @@ Adds the following to your Spress plugin or theme `composer.json` file:
     "yosymfony/spress-installer": "~2.1"
 }
 ```
+PluginInstaller 2.1 requires Spress >= 2.2.0.
 
 ### Extra values
 
 ```json
 "extra": {
-    "spress_class": "Your\\Plugin\\Namespace\\Entry-poin",
+    "spress_class": {
+        "MyVendor\\MyPlugin\\PluginClass1",
+        "MyVendor\\MyPlugin\\PluginClass2"
+    }
 }
 ```
 
-* **spress_class**: The class name of the plugin (including namespaces).
+* **spress_class**: class names of the plugins (including namespaces).
 
 ### An example of `composer.json` file
 
@@ -40,6 +44,25 @@ First, an example of a simple plugin without namespaces:
     "license": "MIT",
     "require": {
         "yosymfony/spress-installer": "~2.1"
+    }
+}
+```
+
+Second, an example of a plugin using namespace:
+
+
+```json
+{
+    "name": "myname/my-spress-plugin",
+    "type": "spress-plugin",
+    "license": "MIT",
+    "require": {
+        "yosymfony/spress-installer": "~2.1"
+    },
+    "extra": {
+        "spress_class": {
+            "MyVendor\\MyPlugin\\PluginClass"
+        }
     }
 }
 ```
