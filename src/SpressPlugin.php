@@ -14,7 +14,7 @@ namespace Yosymfony\Spress\Composer;
 use Composer\Plugin\PluginInterface;
 use Composer\Composer;
 use Composer\IO\IOInterface;
-use Yosymfony\Spress\Composer\Installer\Installer;
+use Yosymfony\Spress\Composer\Installer\SpressInstaller;
 
 class SpressPlugin implements PluginInterface
 {
@@ -26,7 +26,7 @@ class SpressPlugin implements PluginInterface
      */
     public function activate(Composer $composer, IOInterface $io)
     {
-        $installer = new Installer($io, $composer);
+        $installer = new SpressInstaller($io, $composer);
         $composer->getInstallationManager()->addInstaller($installer);
     }
 }
