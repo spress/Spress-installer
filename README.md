@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/spress/Spress-installer.png?branch=master)](https://travis-ci.org/spress/Spress-installer)
 
-Plugin and theme installer for Composer.
+Plugin and theme installer for Spress using Composer.
 
 Package type supported:
 
@@ -18,7 +18,7 @@ Adds the following to your Spress plugin or theme `composer.json` file:
     "yosymfony/spress-installer": "~2.1"
 }
 ```
-PluginInstaller 2.1 requires Spress >= 2.2.0.
+**Notice** PluginInstaller 2.1 requires **Spress >= 2.2.0**.
 
 ### Extra values
 
