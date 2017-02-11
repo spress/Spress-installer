@@ -66,3 +66,13 @@ Second, an example for a plugin using namespace:
     }
 }
 ```
+
+Unit tests
+----------
+
+You can run the unit tests with the following command:
+```bash
+$ cd your-path
+$ composer.phar install
+$ phpunit
+```
