@@ -20,7 +20,6 @@
     "replace": {
         "yosymfony/spress-installer": "self.version"
     },
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Yosymfony\\Spress\\Composer\\": "src/"
